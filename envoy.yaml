@@ -27,25 +27,25 @@ static_resources:
           - name: envoy.router
   clusters:
   - name: highload_cluster
-      connect_timeout: 3s
-      type: STRICT_DNS
-      dns_lookup_family: V4_ONLY
-      load_assignment:
-        cluster_name: highload_cluster
-        endpoints:
-        - lb_endpoints:
-          - endpoint:
-              address:
-                socket_address:
-                  address: 89.208.210.127
-                  port_value: 8080
-          - endpoint:
-              address:
-                socket_address:
-                  address: 185.86.144.89
-                  port_value: 8080
-          - endpoint:
-              address:
-                socket_address:
-                  address: 89.208.228.67
-                  port_value: 8080
+    connect_timeout: 3s
+    type: STRICT_DNS
+    dns_lookup_family: V4_ONLY
+    load_assignment:
+      cluster_name: highload_cluster
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: 89.208.210.127
+                port_value: 8080
+        - endpoint:
+            address:
+              socket_address:
+                address: 185.86.144.89
+                port_value: 8080
+        - endpoint:
+            address:
+              socket_address:
+                address: 89.208.228.67
+                port_value: 8080
