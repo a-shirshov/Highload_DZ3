@@ -38,11 +38,21 @@ static_resources:
     dns_lookup_family: V4_ONLY
     connect_timeout: 5s
     load_assignment:
-      cluster_name: service_envoyproxy_io
+      cluster_name: highload
       endpoints:
       - lb_endpoints:
         - endpoint:
             address:
               socket_address:
-                address: www.envoyproxy.io
-                port_value: 443
+                address: 89.208.210.127
+                port_value: 8080
+        - endpoint:
+            address:
+              socket_address:
+                address: 185.86.144.89
+                port_value: 8080
+        - endpoint:
+            address:
+              socket_address:
+                address: 89.208.228.67
+                port_value: 8080
