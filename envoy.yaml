@@ -1,0 +1,51 @@
+admin:
+  access_log_path: /tmp/admin_access.log
+  address:
+    socket_address: { address: 127.0.0.1, port_value: 9901 }
+
+static_resources:
+  listeners:
+  - name: listener_0
+    address:
+      socket_address: { address: 0.0.0.0, port_value: 10000 }
+    filter_chains:
+    - filters:
+      - name: envoy.http_connection_manager
+          typed_config:
+            "@type": type.googleapis.com/envoy.config.filter.network.http_connection_manager.v2.HttpConnectionManager
+            stat_prefix: echo
+            codec_type: AUTO
+            route_config:
+              name: local_route
+              virtual_hosts:
+              - name: local_service
+                domains: ["*"]
+                routes:
+                - match: { prefix: "/api" }
+                  route: { cluster: highload_cluster }
+            http_filters:
+            - name: envoy.router
+  clusters:
+  - name: highload_cluster
+      connect_timeout: 3s
+      type: STRICT_DNS
+      dns_lookup_family: V4_ONLY
+      load_assignment:
+        cluster_name: highload_cluster
+        endpoints:
+        - lb_endpoints:
+          - endpoint:
+              address:
+                socket_address:
+                  address: 89.208.210.127
+                  port_value: 8080
+          - endpoint:
+              address:
+                socket_address:
+                  address: 185.86.144.89
+                  port_value: 8080
+          - endpoint:
+              address:
+                socket_address:
+                  address: 89.208.228.67
+                  port_value: 8080
