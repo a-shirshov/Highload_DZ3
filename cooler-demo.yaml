@@ -33,7 +33,8 @@ static_resources:
 
   clusters:
   - name: highload
-    type: LOGICAL_DNS
+    type: STATIC
+    lb_policy: ROUND_ROBIN
     # Comment out the following line to test on v6 networks
     dns_lookup_family: V4_ONLY
     connect_timeout: 5s
