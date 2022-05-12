@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"time"
@@ -19,6 +20,7 @@ func main() {
 	r := mux.NewRouter()
 	rApi := r.PathPrefix("/api").Subrouter()
 	rApi.HandleFunc("",slowReply).Methods("GET")
+	fmt.Println("Server started")
 	err := http.ListenAndServe(":8080",r)
 	if err != nil {
 		log.Fatalln("Error: ",err)
