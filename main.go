@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"math/rand"
 	"net/http"
 	"time"
 
@@ -11,7 +12,8 @@ import (
 
 
 func slowReply(w http.ResponseWriter, r *http.Request) {
-	time.Sleep(1000 * time.Millisecond)
+	i := time.Duration(rand.Intn(1000))
+	time.Sleep(i * time.Millisecond)
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte("Server responsed to you my friend!"))
 }

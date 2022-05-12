@@ -12,7 +12,7 @@ func main() {
 
 func loopRequest() {
 	for {
-		resp, err := http.Get("http://85.192.35.76/api")
+		resp, err := http.Get("http://85.192.35.76:10000/api")
 		if err != nil {
 			log.Fatalln(err)
 		}
