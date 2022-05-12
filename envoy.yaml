@@ -21,7 +21,9 @@ static_resources:
               - match: { prefix: "/" }
                 route: { cluster: highload }
           http_filters:
-          - name: envoy.router
+          - name: envoy.filters.http.router
+            typed_config:
+              "@type": type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
   clusters:
   - name: highload
     connect_timeout: 5s
